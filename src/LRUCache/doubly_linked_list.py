@@ -74,21 +74,48 @@ class DoublyLinkedList:
 
     def remove(self, value):
         """
-        Remove the specific value from doubly linked list
+        Remove the specific node from doubly linked list
 
         Args:
-            value (any): the specific node value
+            node (any): the specific node node
         """
-        current = self.head.next
-
-        while current != self.tail and current.value != value:
-            current = current.next
-
-        if current != self.tail:
-            prev_node = current.prev
-            next_node = current.next
+        current_node = self.head.next
+        
+        while current_node != self.tail:
+            if current_node.value == value:
+                prev_node = current_node.prev
+                next_node = current_node.next
+                prev_node.next = next_node
+                next_node.prev = prev_node
+                
+            current_node = current_node.next
+    
+    def pop(self):
+        if self.head.next != self.tail:
+            current_node = self.head.next
+            prev_node = current_node.prev
+            next_node = current_node.next
             prev_node.next = next_node
             next_node.prev = prev_node
+            
+            return current_node
+        return None
+    
+    def get(self, value):
+        """
+        Get the node based on the value
+
+        Args:
+            value (any): the specific value
+        """
+        current_node = self.head.next
+        
+        while current_node != self.tail:
+            if current_node.value == value:
+                return current_node
+            current_node = current_node.next
+        
+        return None
 
     def display(self):
         """
@@ -104,19 +131,3 @@ class DoublyLinkedList:
 
         print(" <=> ".join(results))
 
-linked_list = DoublyLinkedList()
-
-linked_list.append(1)
-linked_list.append(2)
-linked_list.append(3)
-linked_list.append(4)
-
-linked_list.display()
-
-linked_list.remove(4)
-
-linked_list.display()
-
-linked_list.push(0)
-
-linked_list.display()
