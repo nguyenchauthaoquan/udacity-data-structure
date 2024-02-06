@@ -58,8 +58,27 @@ class DoublyLinkedList:
                 self.append(value)
         else:
             raise IndexError("Invalid position")
+        
+    def push(self, value):
+        """Add new value to the doubly linked list
+
+        Args:
+            value (any): The new value item
+        """
+        new_node = Node(value)
+        
+        new_node.next = self.head.next
+        new_node.prev = self.head
+        self.head.next.prev = new_node
+        self.head.next = new_node
 
     def remove(self, value):
+        """
+        Remove the specific value from doubly linked list
+
+        Args:
+            value (any): the specific node value
+        """
         current = self.head.next
 
         while current != self.tail and current.value != value:
@@ -84,3 +103,20 @@ class DoublyLinkedList:
                 current = current.next
 
         print(" <=> ".join(results))
+
+linked_list = DoublyLinkedList()
+
+linked_list.append(1)
+linked_list.append(2)
+linked_list.append(3)
+linked_list.append(4)
+
+linked_list.display()
+
+linked_list.remove(4)
+
+linked_list.display()
+
+linked_list.push(0)
+
+linked_list.display()
