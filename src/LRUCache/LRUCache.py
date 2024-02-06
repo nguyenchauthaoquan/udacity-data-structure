@@ -1,4 +1,6 @@
-from doubly_linked_list import DoublyLinkedList
+
+
+from LinkedList import doubly_linked_list
 
 
 class LRUCache:
@@ -15,7 +17,7 @@ class LRUCache:
         """
         self.capacity = capacity
         self.cache = {}
-        self.linked_list = DoublyLinkedList()
+        self.linked_list = doubly_linked_list()
 
     def get(self, key):
         pass
