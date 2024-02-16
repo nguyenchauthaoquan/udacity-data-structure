@@ -36,30 +36,34 @@ class DoublyLinkedList:
         """
         new_node = Node(value=value)
 
-        if position is not None:
-            if position == 0:
-                if self.head is None:
-                    self.head = new_node
-                    self.tail = new_node
-                else:
-                    new_node.next = self.head
-                    self.head.prev = new_node
-                    self.head = new_node
-            elif position > 0:
-                current = self.head
-                index = 0
+        if position is None:
+            raise IndexError()
 
-                while current is not None and index < position:
-                    current = current.next
-                    index += 1
+        if position > 0:
+            current = self.head
+            index = 0
 
-                if current is None:
-                    self.append(value=value)
-                else:
-                    new_node.next = current
-                    new_node.prev = current.prev
-                    current.prev.next = new_node
-                    current.prev = new_node
+            while current is not None and index < position:
+                current = current.next
+                index += 1
+
+            if current is None:
+                self.append(value=value)
+            else:
+                new_node.next = current
+                new_node.prev = current.prev
+                current.prev.next = new_node
+                current.prev = new_node
+        elif position == 0:
+            if self.head is None:
+                self.head = new_node
+                self.tail = new_node
+            else:
+                new_node.next = self.head
+                self.head.prev = new_node
+                self.head = new_node
+        else:
+            raise IndexError()
 
     def poll(self):
         """
@@ -122,14 +126,42 @@ class DoublyLinkedList:
             prev_node.next = next_node
 
     def get(self, value):
+        """
+        Gets the value from the doubly linked list
+        @param value: the value to be found from the doubly linked list
+        @return: the found value and its index of the doubly linked list
+        """
         current = self.head
         while current is not None:
             if current.value == value:
                 return current.value
             current = current.next
+
+        return None
+
+    def index(self, value):
+        """
+        Get the index of the doubly linked list
+        @param value: the value from the doubly linked list
+        @return: the index of value in doubly linked list
+        """
+        current = self.head
+        index = 0
+
+        while current is not None:
+            if current.value == value:
+                return index
+            current = current.next
+            index += 1
+
         return None
 
     def __contains__(self, item):
+        """
+        Checks if the given item is in doubly linked list
+        @param item: the item to be checked
+        @return: true if the item is in the doubly linked list, otherwise return false
+        """
         current = self.head
 
         while current is not None:
