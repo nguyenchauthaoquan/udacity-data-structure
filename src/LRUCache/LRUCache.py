@@ -2,12 +2,16 @@ from src.LRUCache import DoublyLinkedList
 
 
 class LRUCache:
-    def __init__(self, capacity: int):
+    def __init__(self, capacity):
         self.caches = {}
         self.linked_list = DoublyLinkedList()
-        if capacity < 0:
-            raise ValueError()
-        self.capacity = capacity
+        if isinstance(capacity, int):
+            if capacity >= 0:
+                self.capacity = capacity
+            else:
+                raise ValueError()
+        else:
+            raise TypeError()
 
     def get(self, key):
         if key in self.linked_list:
@@ -28,6 +32,7 @@ class LRUCache:
             self.linked_list.append(value)
 
 
+print('***** Testcase 1 *****')
 our_cache = LRUCache(5)
 
 our_cache.set(1, 1)
@@ -65,9 +70,3 @@ print(our_cache2.get(2))
 our_cache2.set(5, 5)
 print(our_cache2.get(5))
 print(our_cache2.get(6))
-
-our_cache3 = LRUCache(-1)
-our_cache2.set(1, 1)
-our_cache2.set(2, 2)
-print(our_cache2.get(1))
-print(our_cache2.get(2))
