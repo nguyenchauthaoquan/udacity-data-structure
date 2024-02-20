@@ -6,12 +6,19 @@ class DoublyLinkedList:
     The doubly linked list
     """
 
-    def __init__(self):
+    def __init__(self, items=None):
         """
-        Initialize the doubly linked list
+        Initialize the doubly linked list with the provided list
+        @param items: the provided list items
         """
+        if items is None:
+            items = []
         self.head = None
         self.tail = None
+
+        if len(items) > 0:
+            for item in items:
+                self.append(item)
 
     def append(self, value):
         """
@@ -103,6 +110,10 @@ class DoublyLinkedList:
         return current.value
 
     def remove(self, value):
+        """
+        Remove the node contains the value from the doubly linked list
+        @param value: the node value
+        """
         removed_node = None
         current = self.head
 
