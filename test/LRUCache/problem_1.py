@@ -1,6 +1,6 @@
+import random
 import string
 import unittest
-import random
 from random import randrange
 
 from src.LRUCache.LRUCache import LRUCache
