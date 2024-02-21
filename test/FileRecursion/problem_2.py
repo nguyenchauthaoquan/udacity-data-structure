@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from src.FileRecursion.FileRecursion import FileRecursion
+from src.FileRecursion.file_recursion import FileRecursion
 
 
 class MyTestCase(unittest.TestCase):
