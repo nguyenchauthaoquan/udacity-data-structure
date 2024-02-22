@@ -2,12 +2,25 @@ import os
 
 
 class FileRecursion:
-    def find_files_with_built_in(self, suffix, path):
+    @staticmethod
+    def find_files_with_built_in(suffix, path):
+        """
+        Find all files beneath path with file name suffix.
+
+        Note that a path may contain further subdirectories
+        and those subdirectories may also contain further subdirectories.
+
+        There are no limit to the depth of the subdirectories can be.
+
+        @param suffix: suffix if the file name to be found
+        @param path: path of the file system
+        @return: a list of paths
+        """
         file_paths = []
         for root, dirs, files in os.walk(path):
             for file in files:
                 if file.endswith(suffix):
-                    file_paths.append(file)
+                    file_paths.append(os.path.join(root, file))
         return file_paths
 
     def find_files(self, suffix, path):
@@ -26,16 +39,25 @@ class FileRecursion:
         Returns:
            a list of paths
         """
-        if len(suffix) == 0 or len(os.listdir(path=path)) == 0:
+        if len(suffix) == 0:
             return []
 
-        file_paths = [file_path for file_path in os.listdir(path=path) if ('.' + suffix) in file_path]
-        folder_paths = [folder for folder in os.listdir(path=path) if '.' not in folder]
+        suffix = suffix.strip(".")
+        found_directories = set()
+        current_directories = os.listdir(path=path)
 
-        for folder in folder_paths:
-            file_paths.extend(self.find_files(suffix=suffix, path=path + '/' + folder))
+        for directory in current_directories:
+            pathname = "{}\\{}".format(path, directory)
 
-        return file_paths
+            if os.path.isdir(pathname):
+                found_directories = found_directories.union(self.find_files(suffix, pathname))
+
+            if os.path.isfile(pathname):
+                _, file_suffix = directory.rsplit(".", 1)
+                if file_suffix == suffix:
+                    found_directories.add(pathname)
+
+        return found_directories
 
 
 fileRec = FileRecursion()
