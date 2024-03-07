@@ -3,6 +3,10 @@ from src.Tree.node import Node
 
 class Heap:
     def __init__(self, order):
+        """
+        Initialize the new binary heap.
+        @param order: the binary heap type ("min" represents the min heap, "max" represents the max heap)
+        """
         self.root = None
         self.size = 0
 
@@ -14,28 +18,23 @@ class Heap:
         if self.root is None:
             self.root = Node(value)
         else:
-
-            new_node = Node(value)
-            queue = [self.root]
-
-            while queue:
-                current = queue.pop(0)
-                if not current.left:
-                    current.left = new_node
-                    break
-                elif not current.right:
-                    current.right = new_node
-                    break
-                else:
-                    queue.append(current.left)
-                    queue.append(current.right)
-            self._heapify_up(new_node)
+            self._add(self.root, value)
 
     def pre_order(self):
         self._pre_order(self.root)
 
+    def _add(self, node, value):
+        if not node.left:
+            node.left = Node(value)
+            self._heapify_up(node.left)
+        elif not node.right:
+            node.right = Node(value)
+            self._heapify_up(node.right)
+        else:
+            self._add(node.left, value)
+
     def _get_parent_node(self, node):
-        if node is self.root:
+        if not node or node is self.root:
             return None
         traversed = [self.root]
 
@@ -78,22 +77,21 @@ class Heap:
         return self.size
 
 
-if __name__ == "__main__":
-    print("Min heap")
-    min_heap = Heap(order="min")
-    min_heap.add(5)
-    min_heap.add(7)
-    min_heap.add(9)
-    min_heap.add(1)
-    min_heap.add(3)
-    min_heap.pre_order()
-    print("Heap length: ", len(min_heap))
-    print("Max heap")
-    max_heap = Heap(order="max")
-    max_heap.add(5)
-    max_heap.add(7)
-    max_heap.add(9)
-    max_heap.add(1)
-    max_heap.add(3)
-    max_heap.pre_order()
-    print("Heap length: ", len(max_heap))
+# Example usage:
+data = 'AAAAAAABBBCCCCCCCDDEEEEEE'
+char_freq = {}
+for char in data:
+    char_freq[char] = char_freq.get(char, 0) + 1
+print(char_freq)
+min_heap = Heap(order="min")
+for char, freq in char_freq.items():
+    min_heap.add((freq, char))
+
+print("Min Heap:")
+min_heap.pre_order()
+
+max_heap = Heap(order="max")
+for char, freq in char_freq.items():
+    max_heap.add((freq, char))
+print("\nMax Heap:")
+max_heap.pre_order()
