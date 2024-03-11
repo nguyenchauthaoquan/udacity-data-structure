@@ -1,4 +1,4 @@
-from src.Tree.node import Node
+from src.Tree.node import HeapNode
 
 
 class Heap:
@@ -20,7 +20,7 @@ class Heap:
 
     def add(self, value):
         if self.root is None:
-            self.root = Node(value)
+            self.root = HeapNode(value)
         else:
             self._add(self.root, value)
 
@@ -42,10 +42,10 @@ class Heap:
 
     def _add(self, node, value):
         if not node.left:
-            node.left = Node(value)
+            node.left = HeapNode(value)
             self._heaptify_up(node.left)
         elif not node.right:
-            node.right = Node(value)
+            node.right = HeapNode(value)
             self._heaptify_up(node.right)
         else:
             self._add(node.left, value)
@@ -124,6 +124,15 @@ class Heap:
 
         return traversed
 
+    def _get_tree_size(self, node):
+        if not node:
+            return 0
+        return 1 + self._get_tree_size(node.left) + self._get_tree_size(node.right)
+
+    def __len__(self):
+        return self._get_tree_size(self.root)
+
+
 
 # Example usage:
 data = 'AAAAAAABBBCCCCCCCDDEEEEEE'
@@ -136,6 +145,7 @@ for char, freq in char_freq.items():
     min_heap.add((freq, char))
 
 print("Min Heap: ", min_heap.pre_order())
+print(len(min_heap))
 print("Extracted: ", min_heap.extract())
 print("Min Heap: ", min_heap.pre_order())
 
@@ -143,5 +153,6 @@ max_heap = Heap(order="max")
 for char, freq in char_freq.items():
     max_heap.add((freq, char))
 print("Max Heap: ", max_heap.pre_order())
+print(len(max_heap))
 print("Extracted: ", max_heap.extract())
 print("Max Heap: ", max_heap.pre_order())
