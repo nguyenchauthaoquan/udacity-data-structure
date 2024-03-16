@@ -1,4 +1,4 @@
-from src.LinkedList.node import Node
+from src.LinkedList.node import DoublyLinkedListNode
 
 
 class DoublyLinkedList:
@@ -8,24 +8,39 @@ class DoublyLinkedList:
 
     def __init__(self, items=None):
         """
-        Initialize the doubly linked list with the provided list
+        Initialize the doubly linked list with the provided list or not
         @param items: the provided list items
         """
-        if items is None:
-            items = []
         self.head = None
         self.tail = None
+
+        if items is None:
+            items = []
 
         if len(items) > 0:
             for item in items:
                 self.append(item)
 
+    def push(self, value):
+        """
+        Add the new element at the head of the doubly linked list
+        @param value: the new element to be added at the head of the doubly linked list
+        """
+        new_node = DoublyLinkedListNode(value)
+        if self.head is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+
     def append(self, value):
         """
-        Add the new node to the last position of the doubly linked list
-        @param value: the node value
+        Add the new element at the tail of the doubly linked list
+        @param value: the new element to be added at the tail of the doubly linked list
         """
-        new_node = Node(value=value)
+        new_node = DoublyLinkedListNode(value=value)
 
         if not self.tail:
             self.head = new_node
@@ -35,15 +50,15 @@ class DoublyLinkedList:
             new_node.prev = self.tail
             self.tail = new_node
 
-    def insert(self, position, value):
+    def add(self, position, value):
         """
-        Insert a new node into the doubly linked list
+        Add a new element at the specific position into the doubly linked list
         @param position: the position of doubly linked list
-        @param value: the node value
+        @param value: the new element to be added at the specific position of the doubly linked list
         """
-        new_node = Node(value=value)
+        new_node = DoublyLinkedListNode(value=value)
 
-        if position is None:
+        if not isinstance(position, int) or position is None:
             raise IndexError()
 
         if position > 0:
@@ -52,7 +67,6 @@ class DoublyLinkedList:
 
             while current is not None and index < position:
                 current = current.next
-                index += 1
 
             if current is None:
                 self.append(value=value)
@@ -61,21 +75,13 @@ class DoublyLinkedList:
                 new_node.prev = current.prev
                 current.prev.next = new_node
                 current.prev = new_node
-        elif position == 0:
-            if self.head is None:
-                self.head = new_node
-                self.tail = new_node
-            else:
-                new_node.next = self.head
-                self.head.prev = new_node
-                self.head = new_node
-        else:
-            raise IndexError()
+        elif position <= 0:
+            self.push(value=value)
 
     def poll(self):
         """
-        Remove the head of the linked list and return the removed value
-        @return: the removed node value
+        Remove the head of the doubly linked list and return the removed element
+        @return: the element to be removed from the doubly linked list
         """
         current = self.head
 
@@ -90,29 +96,55 @@ class DoublyLinkedList:
             self.pop()
         return current.value
 
-    def pop(self):
+    def pop(self, position=-1):
         """
-        Remove the tail of the linked list and return the removed value
-        @return: the removed node value
+        Remove the tail or the specific position of the doubly linked list and return the removed value
+        @param position: The position of the element from doubly linked list, defaults to -1
+        @return: the removed node value from the doubly linked list
         """
-        current = self.tail
+        # removes the tail of the doubly linked list if the position is negative.
+        if position <= 0:
+            current = self.tail
 
+            if current is None:
+                return None
+            self.tail = current.prev
+
+            if self.tail is not None:
+                self.tail.next = None
+
+            if current is self.head:
+                self.poll()
+
+            return current.value
+
+        current = self.head
+
+        # if the position is out of range of the doubly linked list, remove the tail of the linked list
+        for _ in range(position):
+            if current is None:
+                return self.pop()
+            current = current.next
+        # remove the item from the specific position of the doubly linked list.
         if current is None:
             return None
-        self.tail = current.prev
-
-        if self.tail is not None:
-            self.tail.next = None
 
         if current is self.head:
-            self.poll()
+            self.head = current.next
+        else:
+            current.prev.next = current.next
+
+        if current is self.tail:
+            self.tail = current.prev
+        else:
+            current.next.prev = current.prev
 
         return current.value
 
     def remove(self, value):
         """
-        Remove the node contains the value from the doubly linked list
-        @param value: the node value
+        Remove the element from the doubly linked list
+        @param value: the new element to be added at the specific position of the doubly linked list
         """
         removed_node = None
         current = self.head
@@ -136,23 +168,9 @@ class DoublyLinkedList:
             next_node.prev = prev_node
             prev_node.next = next_node
 
-    def get(self, value):
-        """
-        Gets the value from the doubly linked list
-        @param value: the value to be found from the doubly linked list
-        @return: the found value and its index of the doubly linked list
-        """
-        current = self.head
-        while current is not None:
-            if current.value == value:
-                return current.value
-            current = current.next
-
-        return None
-
     def index(self, value):
         """
-        Get the index of the doubly linked list
+        Get the index of the doubly linked list based on the element of the double linked list
         @param value: the value from the doubly linked list
         @return: the index of value in doubly linked list
         """
@@ -165,11 +183,11 @@ class DoublyLinkedList:
             current = current.next
             index += 1
 
-        return None
+        return -1
 
     def __contains__(self, item):
         """
-        Checks if the given item is in doubly linked list
+        Checks if the given item is in the doubly linked list
         @param item: the item to be checked
         @return: true if the item is in the doubly linked list, otherwise return false
         """
@@ -192,7 +210,7 @@ class DoublyLinkedList:
             result.append(str(current.value))
             current = current.next
 
-        print("<=>".join(result))
+        print(" <=> ".join(result))
 
     def __len__(self):
         """

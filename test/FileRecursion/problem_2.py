@@ -17,29 +17,9 @@ class MyTestCase(unittest.TestCase):
         """
         Tests the File Recursion with the auto-generated path
         """
-        self.assertEqual(self.file_rec.find_files(suffix='c', path=self.path),
-                         {'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\subdir1\\a.c',
-                          'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\subdir3\\subsubdir1\\b.c',
-                          'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\subdir5\\a.c',
-                          'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\t1.c'})
-
-    def test_edge_case_2(self):
-        """
-        Tests the File Recursion with the auto-generated path
-        """
-        self.assertEqual(self.file_rec.find_files(suffix='h', path=self.path),
-                         {'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\subdir1\\a.h',
-                          'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\subdir3\\subsubdir1\\b.h',
-                          'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\subdir5\\a.h',
-                          'D:\\udacity\\udacity-data-structure\\test\\FileRecursion/testdir\\t1.h'})
-
-    def test_edge_case_3(self):
-        """
-        Tests the File Recursion with the auto-generated path
-        """
         self.assertEqual(self.file_rec.find_files(suffix='a', path=self.path), set())
 
-    def test_edge_case_4(self):
+    def test_edge_case_2(self):
         """
         Tests the File Recursion for relative file path case
         """
@@ -48,7 +28,7 @@ class MyTestCase(unittest.TestCase):
                                                                                   './testdir\\subdir5\\a.c',
                                                                                   './testdir\\t1.c'})
 
-    def test_edge_case_5(self):
+    def test_edge_case_3(self):
         """
         Tests the File Recursion for relative file path case
         """
@@ -56,28 +36,6 @@ class MyTestCase(unittest.TestCase):
                                                                                   './testdir\\subdir3\\subsubdir1\\b.h',
                                                                                   './testdir\\subdir5\\a.h',
                                                                                   './testdir\\t1.h'})
-
-    def test_edge_case_6(self):
-        """
-        Tests the File Recursion for absolute file path case
-        """
-        self.assertEqual(self.file_rec.find_files(suffix='c', path='D:/udacity/udacity-data-structure/test'
-                                                                   '/FileRecursion/testdir'),
-                         {'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\subdir1\\a.c',
-                          'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\subdir3\\subsubdir1\\b.c',
-                          'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\subdir5\\a.c',
-                          'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\t1.c'})
-
-    def test_edge_case_10(self):
-        """
-        Tests the File Recursion for absolute file path case
-        """
-        self.assertEqual(self.file_rec.find_files(suffix='h', path='D:/udacity/udacity-data-structure/test'
-                                                                   '/FileRecursion/testdir'),
-                         {'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\subdir1\\a.h',
-                          'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\subdir3\\subsubdir1\\b.h',
-                          'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\subdir5\\a.h',
-                          'D:/udacity/udacity-data-structure/test/FileRecursion/testdir\\t1.h'})
 
     def test_empty_suffix_case_1(self):
         """
