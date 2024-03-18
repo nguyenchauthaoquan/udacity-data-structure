@@ -120,11 +120,13 @@ class DoublyLinkedList:
 
         current = self.head
 
-        # if the position is out of range of the doubly linked list, remove the tail of the linked list
+        # if the position is out of range of the doubly linked list,
+        # remove the tail of the doubly linked list by default
         for _ in range(position):
             if current is None:
                 return self.pop()
             current = current.next
+        # if position is in range of the doubly linked list
         # remove the item from the specific position of the doubly linked list.
         if current is None:
             return None
