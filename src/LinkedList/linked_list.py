@@ -141,6 +141,55 @@ class LinkedList:
             index += 1
 
         return -1
+    
+    def copy(self):
+        """
+        Copy each item of the original linked list to the new one
+        @return: the new linked list
+        """
+        cloned_linked_list = LinkedList()
+        current = self.head
+
+        while current is not None:
+            cloned_linked_list.append(current.value)
+            current = current.next
+
+        return cloned_linked_list
+
+    def union(self, linked_list):
+        """
+        Finds the union between 2 provided linked lists.
+        @param linked_list: the 2nd linked list
+        @return: the linked list including the union between 2 provided linked lists.
+        """
+        if (self is None or self.head is None) and (linked_list is None or linked_list.head is None):
+            return []
+
+        union_linked_list = self.copy()
+        current = linked_list.head
+
+        while current is not None:
+            if current.value not in union_linked_list:
+                union_linked_list.append(current.value)
+            current = current.next
+
+        return union_linked_list
+
+    def intersection(self, linked_list):
+        """
+        Finds the intersection between two provided linked lists
+        @param linked_list: the 2nd linked list
+        @return: the linked list including the intersection between 2 provided linked lists
+        """
+        intersection_linked_list = LinkedList()
+        current = self.head
+
+        while current:
+            if current.value in linked_list:
+                intersection_linked_list.append(current.value)
+            current = current.next
+
+        return intersection_linked_list
 
     def display(self):
         """
@@ -185,20 +234,26 @@ class LinkedList:
 
 
 linked_list = LinkedList()
-linked_list.push(-3)
-linked_list.add(position=-1, value=-2)
-linked_list.add(position=0, value=-1)
-linked_list.add(position=1, value=0)
-linked_list.add(position=2, value=1)
-linked_list.add(position=10, value=2)
+linked_list.append(1)
+linked_list.append(2)
+linked_list.append(3)
+linked_list.append(4)
+linked_list.append(5)
+linked_list.append(7)
 linked_list.display()
-print(linked_list.pop(1))
-linked_list.display()
-print(linked_list.poll())
-linked_list.display()
-print(linked_list.pop(0))
-linked_list.display()
-linked_list.remove(2)
-linked_list.display()
-linked_list.remove(3)
-linked_list.display()
+
+linked_list2 = LinkedList()
+linked_list2.append(1)
+linked_list2.append(2)
+linked_list2.append(3)
+linked_list2.append(4)
+linked_list2.append(5)
+linked_list2.append(6)
+linked_list2.append(8)
+linked_list2.display()
+
+linked_list3 = linked_list.intersection(linked_list2)
+linked_list3.display()
+
+linked_list4 = linked_list.union(linked_list2)
+linked_list4.display()
