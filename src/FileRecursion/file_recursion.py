@@ -16,11 +16,11 @@ class FileRecursion:
         @param path: path of the file system
         @return: a list of paths
         """
-        file_paths = []
+        file_paths = set()
         for root, dirs, files in os.walk(path):
             for file in files:
                 if file.endswith(suffix):
-                    file_paths.append(os.path.join(root, file))
+                    file_paths.add(os.path.join(root, file))
         return file_paths
 
     def find_files(self, suffix, path):
