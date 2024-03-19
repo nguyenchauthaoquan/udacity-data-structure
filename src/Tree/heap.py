@@ -147,6 +147,45 @@ for char, freq in char_freq.items():
 print("Min Heap: ", min_heap.pre_order())
 print(len(min_heap))
 print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Min Heap: ", min_heap.pre_order())
+
+max_heap = Heap(order="max")
+for char, freq in char_freq.items():
+    max_heap.add((freq, char))
+print("Max Heap: ", max_heap.pre_order())
+print(len(max_heap))
+print("Extracted: ", max_heap.extract())
+print("Max Heap: ", max_heap.pre_order())
+
+
+data = 'The bird is the word'
+char_freq = {}
+for char in data:
+    char_freq[char] = char_freq.get(char, 0) + 1
+print(char_freq)
+min_heap = Heap(order="min")
+for char, freq in char_freq.items():
+    min_heap.add((freq, char))
+
+print("Min Heap: ", min_heap.pre_order())
+print(len(min_heap))
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
+print("Extracted: ", min_heap.extract())
 print("Min Heap: ", min_heap.pre_order())
 
 max_heap = Heap(order="max")

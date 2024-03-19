@@ -1,5 +1,6 @@
 from src.Tree.heap import Heap
 from src.Tree.node import HuffmanNode
+import heapq
 
 
 class HuffmanTree:
@@ -8,22 +9,21 @@ class HuffmanTree:
         for char in sequence:
             frequency[char] = frequency.get(char, 0) + 1
 
-        min_heap = Heap(order="min")
+        min_heap = [HuffmanNode(char,freq) for char, freq in frequency.items()]
 
-        for char, freq in frequency.items():
-            min_heap.add(HuffmanNode(char=char, frequency=freq))
+        heapq.heapify(min_heap)
 
         while len(min_heap) > 1:
-            left = min_heap.extract()
-            right = min_heap.extract()
+            left = heapq.heappop(min_heap)
+            right = heapq.heappop(min_heap)
 
             merged_frequency = left.frequency + right.frequency
             merged_node = HuffmanNode(char=None, frequency=merged_frequency)
             merged_node.left = left
             merged_node.right = right
-            min_heap.add(merged_node)
+            heapq.heappush(min_heap,merged_node)
 
-        return min_heap.extract()
+        return min_heap[0]
 
     def build_huffman_codes(self, root, code='', codes=None):
         if codes is None:
@@ -68,7 +68,7 @@ class HuffmanTree:
 
 huffman = HuffmanTree()
 
-sequence = 'AAAAAAABBBCCCCCCCDDEEEEEE'
+sequence = 'The bird is the word'
 
 print(huffman.merge_nodes(sequence).char, huffman.merge_nodes(sequence).frequency)
 
