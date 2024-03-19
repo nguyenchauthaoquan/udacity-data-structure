@@ -33,13 +33,13 @@ class FileRecursion:
         There are no limit to the depth of the subdirectories can be.
 
         Args:
-          suffix(str): suffix if the file name to be found
+          suffix(any): suffix if the file name to be found
           path(str): path of the file system
 
         Returns:
            a list of paths
         """
-        if len(suffix) == 0:
+        if suffix is None or len(suffix) == 0:
             return []
 
         suffix = suffix.strip(".")
