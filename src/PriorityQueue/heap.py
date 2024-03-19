@@ -8,7 +8,7 @@ class PriorityQueue:
 
         self.items = []
         self.order = order
-        self.comparator = lambda x, y: self._compare(x,y)
+        self.comparator = lambda x, y: self._compare(x, y)
 
         if len(items) > 0:
             for item in items:
@@ -30,7 +30,7 @@ class PriorityQueue:
         return min_val
 
     def _heaptify_up(self, i):
-        while self._get_parent_index(i) >= 0 and self.comparator(self.items[i],self.items[self._get_parent_index(i)]):
+        while self._get_parent_index(i) >= 0 and self.comparator(self.items[i], self.items[self._get_parent_index(i)]):
             self.items[i], self.items[self._get_parent_index(i)] = self.items[self._get_parent_index(i)], self.items[i]
             i = self._get_parent_index(i)
 
@@ -41,13 +41,12 @@ class PriorityQueue:
 
         if left_child_index < len(self.items) and self.comparator(self.items[left_child_index], self.items[smallest]):
             smallest = left_child_index
-        if right_child_index < len(self.items) and self.comparator(self.items[right_child_index],self.items[smallest]):
+        if right_child_index < len(self.items) and self.comparator(self.items[right_child_index], self.items[smallest]):
             smallest = right_child_index
 
         if smallest != i:
             self.items[i], self.items[smallest] = self.items[smallest], self.items[i]
             self._heaptify_down(smallest)
-
 
     def _get_parent_index(self, i):
         return int((i - 1) / 2)
@@ -78,7 +77,7 @@ print(heap.extract())
 print(heap.extract())
 print(heap.extract())
 print(heap.items)
-heap2 = PriorityQueue(items=[7,3,7,2,6], order="max")
+heap2 = PriorityQueue(items=[7, 3, 7, 2, 6], order="max")
 print(heap2.items)
 print(heap2.extract())
 print(heap2.extract())
