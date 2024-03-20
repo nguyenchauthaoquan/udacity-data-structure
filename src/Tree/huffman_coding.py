@@ -1,6 +1,17 @@
-from src.Tree.heap import Heap
-from src.Tree.node import HuffmanNode
+# from src.Tree.heap import Heap
+
 import heapq
+
+
+class HuffmanNode:
+    def __init__(self, char, frequency):
+        self.char = char
+        self.frequency = frequency
+        self.left = None
+        self.right = None
+
+    def __lt__(self, other):
+        return self.frequency < other.frequency
 
 
 class HuffmanTree:
@@ -9,7 +20,7 @@ class HuffmanTree:
         for char in sequence:
             frequency[char] = frequency.get(char, 0) + 1
 
-        min_heap = [HuffmanNode(char,freq) for char, freq in frequency.items()]
+        min_heap = [HuffmanNode(char, freq) for char, freq in frequency.items()]
 
         heapq.heapify(min_heap)
 
@@ -18,10 +29,10 @@ class HuffmanTree:
             right = heapq.heappop(min_heap)
 
             merged_frequency = left.frequency + right.frequency
-            merged_node = HuffmanNode(char=None, frequency=merged_frequency)
+            merged_node = HuffmanNode(None, merged_frequency)
             merged_node.left = left
             merged_node.right = right
-            heapq.heappush(min_heap,merged_node)
+            heapq.heappush(min_heap, merged_node)
 
         return min_heap[0]
 
@@ -70,7 +81,7 @@ huffman = HuffmanTree()
 
 sequence = 'The bird is the word'
 
-print(huffman.merge_nodes(sequence).char, huffman.merge_nodes(sequence).frequency)
+print(huffman.merge_nodes(sequence).frequency)
 
 encoded_sequence, tree = huffman.huffman_encoding(sequence)
 print("Encoded data:", encoded_sequence)
