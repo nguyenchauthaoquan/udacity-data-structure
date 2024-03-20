@@ -2,13 +2,12 @@ import heapq
 
 
 class PriorityQueue:
-    def __init__(self, order, items=None):
+    def __init__(self, comparator=lambda x,y: x < y, items=None):
         if items is None:
             items = []
 
         self.items = []
-        self.order = order
-        self.comparator = lambda x, y: self._compare(x, y)
+        self.comparator = comparator
 
         if len(items) > 0:
             for item in items:
@@ -57,14 +56,8 @@ class PriorityQueue:
     def _get_right_child_index(self, i):
         return 2 * i + 2
 
-    def _compare(self, x, y):
-        if self.order.lower() == "min":
-            return x < y
-        elif self.order.lower() == "max":
-            return x > y
 
-
-heap = PriorityQueue(order="min")
+heap = PriorityQueue(comparator=lambda x,y: x > y)
 heap.add(7)
 heap.add(3)
 heap.add(7)
@@ -77,7 +70,7 @@ print(heap.extract())
 print(heap.extract())
 print(heap.extract())
 print(heap.items)
-heap2 = PriorityQueue(items=[7, 3, 7, 2, 6], order="max")
+heap2 = PriorityQueue(items=[7, 3, 7, 2, 6], comparator=lambda x,y: x > y)
 print(heap2.items)
 print(heap2.extract())
 print(heap2.extract())
