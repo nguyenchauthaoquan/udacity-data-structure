@@ -18,14 +18,14 @@ class HuffmanTree:
         for char in sequence:
             frequency[char] = frequency.get(char, 0) + 1
 
-        min_heap = Heap() # [HuffmanNode(char, freq) for char, freq in frequency.items()]
+        min_heap = Heap()  # [HuffmanNode(char, freq) for char, freq in frequency.items()]
 
         for char, freq in frequency.items():
             min_heap.add(HuffmanNode(char=char, frequency=freq))
 
         while len(min_heap) > 1:
-            left = min_heap.extract() #heapq.heappop(min_heap)
-            right = min_heap.extract() #heapq.heappop(min_heap)
+            left = min_heap.extract()
+            right = min_heap.extract()
 
             merged_frequency = left.frequency + right.frequency
             merged_node = HuffmanNode(None, merged_frequency)
