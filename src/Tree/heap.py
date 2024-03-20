@@ -69,7 +69,7 @@ class Heap:
         node = self._find_node(self.root, val)
         while node:
             parent = self._find_parent(self.root, val)
-            if parent and parent.value > node.value:
+            if parent and parent < node:
                 parent.value, node.value = node.value, parent.value
                 node = parent
             else:
@@ -79,7 +79,7 @@ class Heap:
         node = self._find_node(self.root, val)
         while node:
             min_child = self._find_min_child(node)
-            if min_child and min_child.value < node.value:
+            if min_child and min_child > node:
                 min_child.value, node.value = node.value, min_child.value
                 node = min_child
             else:
@@ -112,7 +112,7 @@ class Heap:
             return node.right
         if not node.right:
             return node.left
-        return node.left if node.left.value < node.right.value else node.right
+        return node.left if node.left > node.right else node.right
 
     def traverse(self):
         self.pre_order(self.root)
@@ -138,15 +138,29 @@ for char, freq in char_freq.items():
 min_heap.traverse()
 
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
+print('h' > 'i')
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
 print("Extracted: ", min_heap.extract_root())
+min_heap.traverse()
