@@ -11,8 +11,10 @@ class Node:
         if isinstance(self.value, int) or isinstance(self.value, float) or isinstance(self.value, decimal.Decimal):
             return self.value < other.value
         elif isinstance(self.value, (list, tuple, set)):
-            for value,other_value in zip(self.value, other.value):
-                if (isinstance(value, int) or isinstance(value, float) or isinstance(value, decimal.Decimal)) and isinstance(other_value, int) or isinstance(other_value, float) or isinstance(other_value, decimal.Decimal):
+            for value, other_value in zip(self.value, other.value):
+                if (isinstance(value, int) or isinstance(value, float) or isinstance(value, decimal.Decimal)) and (
+                        isinstance(other_value, int) or isinstance(other_value, float) or isinstance(other_value,
+                                                                                                     decimal.Decimal)):
                     return value < other_value
 
     def __gt__(self, other):
@@ -20,7 +22,8 @@ class Node:
             return self.value > other.value
         elif isinstance(self.value, (list, tuple, set)):
             for value, other_value in zip(self.value, other.value):
-                if (isinstance(value, int) or isinstance(value, float) or isinstance(value,
-                                                                                     decimal.Decimal)) and isinstance(
-                        other_value, int) or isinstance(other_value, float) or isinstance(other_value, decimal.Decimal):
+                if (isinstance(value, int) or isinstance(value, float) or isinstance(value, decimal.Decimal)) and (
+                        isinstance(
+                                other_value, int) or isinstance(other_value, float) or isinstance(other_value,
+                                                                                                  decimal.Decimal)):
                     return value > other_value

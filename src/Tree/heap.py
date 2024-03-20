@@ -23,10 +23,10 @@ class Heap:
                 queue.append(node.right)
         self._heapify_up(val)
 
-    def extract_root(self):
+    def extract_max(self):
         if not self.root:
             return None
-        root_val = self.root.value
+        max_val = self.root.value
         last_val = self._get_last_node().value
         if self.root == self._get_last_node():
             self.root = None
@@ -34,7 +34,7 @@ class Heap:
             self.root.value = last_val
             self._remove_last_node()
             self._heapify_down(self.root.value)
-        return root_val
+        return max_val
 
     def _get_last_node(self):
         queue = [self.root]
@@ -78,10 +78,10 @@ class Heap:
     def _heapify_down(self, val):
         node = self._find_node(self.root, val)
         while node:
-            min_child = self._find_min_child(node)
-            if min_child and min_child > node:
-                min_child.value, node.value = node.value, min_child.value
-                node = min_child
+            max_child = self._find_max_child(node)
+            if max_child and max_child > node:
+                max_child.value, node.value = node.value, max_child.value
+                node = max_child
             else:
                 break
 
@@ -103,7 +103,7 @@ class Heap:
         right_search = self._find_parent(root.right, val)
         return left_search if left_search else right_search
 
-    def _find_min_child(self, node):
+    def _find_max_child(self, node):
         if not node:
             return None
         if not node.left and not node.right:
@@ -112,7 +112,7 @@ class Heap:
             return node.right
         if not node.right:
             return node.left
-        return node.left if node.left > node.right else node.right
+        return node.left if node.left.value > node.right.value else node.right
 
     def traverse(self):
         self.pre_order(self.root)
@@ -137,30 +137,29 @@ for char, freq in char_freq.items():
 
 min_heap.traverse()
 
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print('h' > 'i')
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
-print("Extracted: ", min_heap.extract_root())
+print("Extracted: ", min_heap.extract_max())
 min_heap.traverse()
