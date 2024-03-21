@@ -5,10 +5,12 @@ class Group(object):
         self.users = []
 
     def add_group(self, group):
-        self.groups.append(group)
+        if group is not None:
+            self.groups.append(group)
 
     def add_user(self, user):
-        self.users.append(user)
+        if user is not None and len(user.strip()) > 0:
+            self.users.append(user)
 
     def get_groups(self):
         return self.groups
@@ -18,6 +20,7 @@ class Group(object):
 
     def get_name(self):
         return self.name
+
 
 def is_user_in_group(user, group):
     """
@@ -37,6 +40,7 @@ def is_user_in_group(user, group):
             if is_user_in_group(user, group_item):
                 return True
         return False
+
 
 empty_group = Group("empty group")
 user = "user"
@@ -67,7 +71,6 @@ print(group_1.get_name(), "group has user?", is_user_in_group("user1", group_2))
 print(group_1.get_name(), "group has user?", is_user_in_group("user2", group_2))
 print(group_1.get_name(), "group has user?", is_user_in_group("user3", group_2))
 print(group_1.get_name(), "group has user?", is_user_in_group("user4", group_2))
-
 
 print(group_1.get_name(), "group has user?", is_user_in_group("user5", group_2))
 print(group_1.get_name(), "group has user?", is_user_in_group("user6", group_2))
