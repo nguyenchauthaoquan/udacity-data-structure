@@ -16,8 +16,6 @@ class MyTestCase(unittest.TestCase):
 
         self.huffman = HuffmanTree()
 
-
-
     @parameterized.expand([
         ["The bird is the word", ],
         ["The dog is the best friends"],
@@ -48,10 +46,7 @@ class MyTestCase(unittest.TestCase):
 
         decoded_sequence = self.huffman.huffman_decoding(encoded_sequence, merged_node)
 
-        print("Input: ", sequence, " ,output: ", decoded_sequence)
-
         self.assertEqual(len(decoded_sequence), len(sequence) if sequence is not None else 0)
-
 
 
 if __name__ == '__main__':
