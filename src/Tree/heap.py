@@ -26,6 +26,7 @@ class Heap:
             else:
                 traversed.append(node.left)
                 traversed.append(node.right)
+
         self._heaptify_up(value)
 
     def extract(self):
