@@ -1,7 +1,7 @@
 import datetime
 
 from src.LinkedList.linked_list import LinkedList
-from block import Block
+from src.BlockChain.block import Block
 
 
 class BlockChain:
@@ -28,20 +28,27 @@ class BlockChain:
             print()
             current_block = current_block.next
 
+    def __contains__(self, item):
+        current_block = self.blocks.head
+        while current_block:
+            if item == current_block.value.data:
+                return True
+        return False
 
-# Test Case 1: Adding blocks to the blockchain
+
+# Sample 1: Adding blocks to the blockchain
 blockchain = BlockChain()
 blockchain.add_block("Block 0")
 blockchain.add_block("Block 1")
 blockchain.add_block("Block 2")
 blockchain.print_blocks()
 
-# Test Case 2: Edge case - Empty data
+# Sample 2: Edge case - Empty data
 blockchain_empty = BlockChain()
 blockchain_empty.add_block("")  # Adding an empty block
 blockchain_empty.print_blocks()
 
-# Test Case 3: Edge case - Large data
+# Sample 3: Edge case - Large data
 blockchain_large = BlockChain()
 large_data = "A" * 1000  # Creating a large data string
 blockchain_large.add_block(large_data)

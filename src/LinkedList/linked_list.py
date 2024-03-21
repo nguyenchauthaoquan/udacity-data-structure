@@ -6,12 +6,18 @@ class LinkedList:
     The singly-linked list.
     """
 
-    def __init__(self):
+    def __init__(self, items=None):
         """
         Initialize the singly-linked list
         """
+        if items is None:
+            items = []
+
         self.head = None
         self.tail = None
+
+        for item in items:
+            self.append(item)
 
     def push(self, value):
         """
@@ -181,6 +187,9 @@ class LinkedList:
         @param linked_list: the 2nd linked list
         @return: the linked list including the intersection between 2 provided linked lists
         """
+        if (self is None or self.head is None) and (linked_list is None or linked_list.head is None):
+            return []
+
         intersection_linked_list = LinkedList()
         current = self.head
 
@@ -243,13 +252,7 @@ linked_list.append(7)
 linked_list.display()
 
 linked_list2 = LinkedList()
-linked_list2.append(1)
-linked_list2.append(2)
-linked_list2.append(3)
-linked_list2.append(4)
-linked_list2.append(5)
-linked_list2.append(6)
-linked_list2.append(8)
+
 linked_list2.display()
 
 linked_list3 = linked_list.intersection(linked_list2)
