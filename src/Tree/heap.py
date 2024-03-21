@@ -207,7 +207,6 @@ class Heap:
         return self._get_heap_size(self.root)
 
 
-
 data = 'The bird is the word'
 char_freq = {}
 for char in data:

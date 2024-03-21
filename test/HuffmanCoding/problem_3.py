@@ -1,7 +1,8 @@
+import random
+import string
 import sys
 import unittest
-import string
-import random
+
 from parameterized import parameterized
 
 from src.Tree.huffman_coding import HuffmanTree

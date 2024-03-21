@@ -32,7 +32,8 @@ class MyTestCase(unittest.TestCase):
     def test_empty_block_case(self):
         block_chain = BlockChain()
 
-        self.assertEqual(len(block_chain.blocks),0)
+        self.assertEqual(len(block_chain.blocks), 0)
+
 
 if __name__ == '__main__':
     unittest.main()

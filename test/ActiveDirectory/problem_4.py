@@ -73,5 +73,6 @@ class MyTestCase(unittest.TestCase):
         self.assertFalse(is_user_in_group(sub_user, group))
         self.assertFalse(is_user_in_group(sub_user, sub_group))
 
+
 if __name__ == '__main__':
     unittest.main()

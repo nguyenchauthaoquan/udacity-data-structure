@@ -1,7 +1,7 @@
 import datetime
 
-from src.LinkedList.linked_list import LinkedList
 from src.BlockChain.block import Block
+from src.LinkedList.linked_list import LinkedList
 
 
 class BlockChain:

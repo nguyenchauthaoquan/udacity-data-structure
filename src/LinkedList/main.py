@@ -45,7 +45,6 @@ print(len(doubly_linked_list))
 
 print(2.5 in doubly_linked_list)
 
-
 print("Initialized the linked list")
 linked_list = DoublyLinkedList([1, 2, 3, 4])
 linked_list.display()

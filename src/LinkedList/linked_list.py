@@ -147,7 +147,7 @@ class LinkedList:
             index += 1
 
         return -1
-    
+
     def copy(self):
         """
         Copy each item of the original linked list to the new one

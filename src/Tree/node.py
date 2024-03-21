@@ -18,9 +18,11 @@ class Node:
                     return value < other_value
 
     def __gt__(self, other):
-        if isinstance(self.value, (int, float, decimal.Decimal, str)) and isinstance(other.value, (int, float, decimal.Decimal, str)):
+        if isinstance(self.value, (int, float, decimal.Decimal, str)) and isinstance(other.value, (
+        int, float, decimal.Decimal, str)):
             return self.value > other.value
         elif isinstance(self.value, (list, tuple, set)):
             for value, other_value in zip(self.value, other.value):
-                if isinstance(value, (int, float, decimal.Decimal, str)) and isinstance(other_value, (int, float, decimal.Decimal, str)):
+                if isinstance(value, (int, float, decimal.Decimal, str)) and isinstance(other_value, (
+                int, float, decimal.Decimal, str)):
                     return value > other_value
