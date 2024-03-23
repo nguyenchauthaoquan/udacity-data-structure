@@ -161,6 +161,7 @@ A data compression algorithm could be either lossy or lossless, meaning that whe
 
 Assume that we have a string message AAAAAAABBBCCCCCCCDDEEEEEE comprising of 25 characters to be encoded. The string message can be an unsorted one as well. We will have two phases in encoding - building the Huffman tree (a binary tree), and generating the encoded data. The following steps illustrate the Huffman encoding:
 1.First, determine the frequency of each character in the message. In our example, the following table presents the frequency of each character.
+
 | (Unique) Character | Frequency |
 |--------------------|-----------|
 | A	                 | 7         |
@@ -172,5 +173,44 @@ Assume that we have a string message AAAAAAABBBCCCCCCCDDEEEEEE comprising of 25 
 2. Each row in the table above can be represented as a node having a character, frequency, left child, and right child. In the next step, we will repeatedly require to pop-out the node having the lowest frequency. Therefore, build and sort a list of nodes in the order lowest to highest frequencies. Remember that a list preserves the order of elements in which they are appended.
 
 We would need our list to work as a [priority queue](https://en.wikipedia.org/wiki/Priority_queue), where a node that has lower frequency should have a higher priority to be popped-out. The following snapshot will help you visualize the example considered above:
-![priority_queue.png](documents%2Fimages%2Fpriority_queue.png). In this project, I will use the min heap instead, although the order is different from heapq transformation list, but the order is correct when using the traditional traversal
+![priority_queue.png](documents%2Fimages%2Fpriority_queue.png)
+
+In this project, I will use the min heap instead of priority queue, both of them operate the same, although the order is different from heapq transformation list, but the order is correct when using the traditional traversal
+3. Pop-out two nodes with the minimum frequency from the priority queue created in the above step.
+
+4. Create a new node with a frequency equal to the sum of the two nodes picked in the above step. This new node would become an internal node in the Huffman tree, and the two nodes would become the children. The lower frequency node becomes a left child, and the higher frequency node becomes the right child. Reinsert the newly created node back into the priority queue.
+
+5. Repeat steps #3 and #4 until there is a single element left in the priority queue. The snapshots below present the building of a Huffman tree.
+
+![huffman-tree-1.png](documents%2Fimages%2Fhuffman-tree-1.png)
+
+![huffman-tree-2.png](documents%2Fimages%2Fhuffman-tree-2.png)
+
+6. For each node, in the Huffman tree, assign a bit 0 for left child and a 1 for right child. See the final Huffman tree for our example:
+
+![huffman-tree-3.png](documents%2Fimages%2Fhuffman-tree-3.png)
+
+7. Based on the Huffman tree, generate unique binary code for each character of our string message. For this purpose, you'd have to traverse the path from root to the leaf node.
+
+
+| (Unique) Character | Frequency | Huffman Code |
+|:-------------------|-----------|--------------|
+| D                  | 2         | 000          | 
+| B                  | 3         | 001          | 
+| E                  | 6         | 01           | 
+| A                  | 7         | 10           | 
+| C                  | 7         | 11           |
+
+#### Time complexity
+##### Heap
+The time complexity for adding new item based on both current node and parent node and re-structure the tree with add method to binary heap tree is O(n^2) ~= O(log(n)).
+
+The time complexity for remove node
+
+##### Huffman Coding solution
+
+#### Space complexity
+##### Heap
+
+##### Huffman Coding solution
 
