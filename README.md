@@ -2026,3 +2026,10 @@ Make sure that you will need these setups:
 ### Run the sample code
 You can run directly in the src to view some sample outputs by right-clicking the python file (main.py or the name of the problem(for example of the Problem 1: LRU Cache, then the correspond file is LRUCache.py))
 I have added the test cases by using the python unittest, you can run one of the python file (problem_1.py, problem_1.py, problem_2.py, problem_3.py, problem_4.py, problem_5, problem_6.py) based on the problem name in test folder, the name of each folder in test folder is the problem name
+
+## References
+
+1. [Linked list naming conventions](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html#LinkedList--)
+2. [Priority Queue](https://visualgo.net/en/heap)
+3. [Heap](https://visualgo.net/en/heap)
+4. [Predecessor Solutions](https://github.com/suhassrivats/Udacity-Data-Structures-and-Algorithms/tree/master/2_ShowMeTheDataStructures)
