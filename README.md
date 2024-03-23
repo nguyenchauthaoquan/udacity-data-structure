@@ -2024,7 +2024,7 @@ Make sure that you will need these setups:
 2. IDE: [PyCharm](https://www.jetbrains.com/pycharm/download/?section=windows)
 3. Packages: parameterized, unittest (make sure either pip or conda is required)
 ### Run the sample code
-You can run directly in the src to view some sample outputs by right-clicking the python file (main.py or the name of the problem(for example of the Problem 1: LRU Cache, then the correspond file is LRUCache.py))
+You can run directly in the src to view some sample outputs by right-clicking the python file (main.py or the name of the problem(for example of the Problem 1: LRU Cache, then the correspond file is LRUCache.py)) and select 'Run <python file>'
 I have added the test cases by using the python unittest, you can run one of the python file (problem_1.py, problem_1.py, problem_2.py, problem_3.py, problem_4.py, problem_5, problem_6.py) based on the problem name in test folder, the name of each folder in test folder is the problem name
 
 ## References
