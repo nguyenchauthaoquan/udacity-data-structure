@@ -1,5 +1,10 @@
 class PriorityQueue:
     def __init__(self, comparator=lambda x, y: x < y, items=None):
+        """
+        Initialize a priority queue with the given comparator
+        @param comparator: a comparator
+        @param items: The initialized priority queue items
+        """
         if items is None:
             items = []
 
@@ -11,10 +16,17 @@ class PriorityQueue:
                 self.add(item)
 
     def add(self, value):
+        """
+        Add the new item to the priority queue
+        @param value: The item to add
+        """
         self.items.append(value)
         self._heaptify_up(len(self.items) - 1)
 
     def extract(self):
+        """
+        Extracts and removes the item from the priority queue
+        """
         if len(self.items) == 0:
             return None
         if len(self.items) == 1:
@@ -26,11 +38,19 @@ class PriorityQueue:
         return min_val
 
     def _heaptify_up(self, i):
+        """
+        Bubble up the items in priority queue
+        @param i: The index of the item to bubble up
+        """
         while self._get_parent_index(i) >= 0 and self.comparator(self.items[i], self.items[self._get_parent_index(i)]):
             self.items[i], self.items[self._get_parent_index(i)] = self.items[self._get_parent_index(i)], self.items[i]
             i = self._get_parent_index(i)
 
     def _heaptify_down(self, i):
+        """
+        Bubble down the items in priority queue
+        @param i: The index of the item to bubble down
+        """
         left_child_index = self._get_left_child_index(i)
         right_child_index = self._get_right_child_index(i)
         smallest = i
@@ -45,33 +65,22 @@ class PriorityQueue:
             self._heaptify_down(smallest)
 
     def _get_parent_index(self, i):
+        """
+        Gets the index of the parent item of priority queue
+        @param i: The index of the item
+        """
         return int((i - 1) / 2)
 
     def _get_left_child_index(self, i):
+        """
+        Gets the index of the left child item of priority queue
+        @param i: The index of the item
+        """
         return 2 * i + 1
 
     def _get_right_child_index(self, i):
+        """
+        Gets the index of the right child item of priority queue
+        @param i: The index of the item
+        """
         return 2 * i + 2
-
-
-heap = PriorityQueue(comparator=lambda x, y: x > y)
-heap.add(7)
-heap.add(3)
-heap.add(7)
-heap.add(2)
-heap.add(6)
-print(heap.items)
-print(heap.extract())
-print(heap.extract())
-print(heap.extract())
-print(heap.extract())
-print(heap.extract())
-print(heap.items)
-heap2 = PriorityQueue(items=[7, 3, 7, 2, 6], comparator=lambda x, y: x > y)
-print(heap2.items)
-print(heap2.extract())
-print(heap2.extract())
-print(heap2.extract())
-print(heap2.extract())
-print(heap2.extract())
-print(heap2.items)

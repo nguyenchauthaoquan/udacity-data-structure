@@ -77,26 +77,3 @@ class HuffmanTree:
                 current_node = merged_node
 
         return decoded_sequence
-
-
-huffman = HuffmanTree()
-
-sequence = 'The bird is the word'
-
-print(huffman.merge_nodes(sequence))
-
-encoded_sequence, tree = huffman.huffman_encoding(sequence)
-print("Encoded data:", encoded_sequence)
-
-decoded_sequence = huffman.huffman_decoding(encoded_sequence, tree)
-print("Decoded data:", decoded_sequence)
-
-sequence = None
-
-print(huffman.merge_nodes(sequence))
-
-encoded_sequence, tree = huffman.huffman_encoding(sequence)
-print("Encoded data:", encoded_sequence)
-
-decoded_sequence = huffman.huffman_decoding(encoded_sequence, tree)
-print("Decoded data:", decoded_sequence)

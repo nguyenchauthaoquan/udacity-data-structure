@@ -240,23 +240,3 @@ class LinkedList:
             current = current.next
 
         return count
-
-
-linked_list = LinkedList()
-linked_list.append(1)
-linked_list.append(2)
-linked_list.append(3)
-linked_list.append(4)
-linked_list.append(5)
-linked_list.append(7)
-linked_list.display()
-
-linked_list2 = LinkedList()
-
-linked_list2.display()
-
-linked_list3 = linked_list.intersection(linked_list2)
-linked_list3.display()
-
-linked_list4 = linked_list.union(linked_list2)
-linked_list4.display()
